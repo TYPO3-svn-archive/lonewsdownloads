@@ -1,0 +1,32 @@
+plugin.tt_news { 
+  lonewsdownloads {
+    download_single = COA
+    download_single {
+      stdWrap.if.isTrue.field = single_news_file
+      15 = TEXT
+      15 {
+        value = <img src="{$plugin.tt_news.tt_news_download.iconFolder}{field:single_news_file_file_type}.gif" alt="Dateiendung: {field:single_news_file_file_type}" />
+        insertData = 1
+        wrap = &nbsp;<span class="download_icon">|</span>
+      }
+      10 = TEXT
+      10  {
+        field = single_news_file_title
+        typolink.parameter.field =single_news_file
+        wrap = <span class="download_text">|</span>
+      }
+      20 = TEXT
+      20  {
+        field = single_news_file_file_size
+        wrap = &nbsp;(<span class="download_filesize">|</span>)
+      }
+      wrap = <li>|</li>
+    }
+    download_list = TEXT
+    download_list {
+      required = 1
+      field = lodownload_list
+      wrap = <ul>|</ul>
+    }
+  }
+}

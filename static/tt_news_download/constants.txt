@@ -1,0 +1,3 @@
+plugin.tt_news.tt_news_download {
+  iconFolder = typo3/gfx/fileicons/
+}
