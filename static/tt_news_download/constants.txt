@@ -1,3 +1,8 @@
-plugin.tt_news.tt_news_download {
+plugin.tt_news.lonewsdownloads {
+  # cat=plugin.tt_news.lonewsdownloads/xxx/005; type=String; label= Template
+  templateFile = EXT:lonewsdownloads/res/lonewsdownloadsTemplate.html
+  # cat=plugin.tt_news.lonewsdownloads/xxx/010; type=String; label= Path to the File Type Icons
   iconFolder = typo3/gfx/fileicons/
+  # cat=plugin.tt_news.lonewsdownloads/xxx/020; type=options[,_top,_blank]; label= File Link Target [,_top,_blank]
+  targetFileLink = _top
 }

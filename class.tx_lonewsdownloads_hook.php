@@ -62,7 +62,6 @@ class tx_lonewsdownloads_hook extends tslib_pibase {
 		$conf = $pObj->conf;
 		$confLinks = $conf['lonewsdownloads.'];
 		
-		
 		if(!$confLinks['download_single'])
 		{
 		  $markerArray['###LO_DOWNLOADS###']= 'Please include static TypoScript of LONewsDownloads or remove marker. "###LO_DOWNLOADS###"';
@@ -114,12 +113,18 @@ class tx_lonewsdownloads_hook extends tslib_pibase {
 		$local_cObj = t3lib_div::makeInstance('tslib_cObj');
 		$local_data = $this->cObj->data;
 		$local_data = $row;
+		if(!$confLinks['maxItems'])
+			$confLinks['maxItems'] = null;
+		if($confLinks['start'] || $confLinks['maxItems'])
+			$files = array_slice($files, $confLinks['start'], $confLinks['maxItems'], true);
 		foreach($files AS $key => $file) {
 			if(is_array($fileData[$key])) {
 				foreach($fileData[$key] AS $keyD => $valueD) {
 					$local_data['single_news_file_'.$keyD] = $valueD;
 				}
 			}
+			
+			/*
 			$local_data['single_news_file_file_size_Byte'] = intval($local_data['single_news_file_file_size']);
 			$local_data['single_news_file_file_size_kB'] = round($local_data['single_news_file_file_size'] / 1024);
 			$local_data['single_news_file_file_size_MB'] = round($local_data['single_news_file_file_size'] / 1024 / 1024);
@@ -130,6 +135,7 @@ class tx_lonewsdownloads_hook extends tslib_pibase {
 			} else {
 				$local_data['single_news_file_file_size'] = $local_data['single_news_file_file_size_Byte'].' Byte';
 			}
+			*/
 			
 			$local_data['single_news_file'] = $file;
 		  $local_cObj->data = $local_data;

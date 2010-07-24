@@ -1,9 +1,8 @@
 <?php
-if (!defined ('TYPO3_MODE')) {
- 	die ('Access denied.');
+if (!defined ('TYPO3_MODE')) die('Access denied.');
+
+// Extra markers hook for tt_news
+if (t3lib_extMgm::isLoaded('tt_news')) {
+	$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tt_news']['extraItemMarkerHook'][$_EXTKEY] = 'EXT:lonewsdownloads/class.tx_lonewsdownloads_hook.php:&tx_lonewsdownloads_hook';
 }
-if (TYPO3_MODE == 'FE')    {
-    require_once(t3lib_extMgm::extPath('lonewsdownloads').'class.tx_lonewsdownloads_hook.php');
-}
-$TYPO3_CONF_VARS['EXTCONF']['tt_news']['extraItemMarkerHook'][]   = 'tx_lonewsdownloads_hook';
 ?>
