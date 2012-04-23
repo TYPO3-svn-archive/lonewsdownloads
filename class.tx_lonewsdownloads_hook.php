@@ -84,6 +84,14 @@ class tx_lonewsdownloads_hook extends tslib_pibase {
 				 $uid = $row['_LOCALIZED_UID'];
 				}
 				$damFiles = tx_dam_db::getReferencedFiles('tt_news', $uid, 'tx_damnews_dam_media' );
+				// Thanks to Lars Trebing, Marit AG
+				if(count($damFiles['rows']) > 0) {
+					$overlayConf = array('sys_language_uid' => $this->sys_language_uid);
+					foreach($damFiles['rows'] as $fileKey => $fileRow) {
+						$fileRow = $recordOverlay = tx_dam_db::getRecordOverlay('tx_dam', $fileRow, $overlayConf);
+						$damFiles['rows'][$fileKey] = $fileRow;
+					}
+				}
 				$files = $damFiles['files'];
 				$fileData = $damFiles['rows'];
 				//t3lib_div::debug($damFiles);
